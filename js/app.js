@@ -9,7 +9,10 @@ new Vue({
             {firstname: 'John', lastname:'Doe'},
             {firstname: 'Jane', lastname:'Jones'},
             {firstname: 'Will ', lastname:'Smith'}
-        ]
+        ],
+        movies: '',
+        liveFilter: '',
+        genreFilter: ''
     },
 
     ready: function(){

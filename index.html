@@ -8,34 +8,45 @@
 <body>
 
 <div class="container" id="app">
-    <h1>{{ hello }}</h1>
+    <div class="filter">
+        <input type="text" class="form-control" v-model="liveFilter">
+        <h4>Filter by Genre:</h4>
+        <div class="row">
+            <div class="col-md-6">
+                <select name="" id="" class="form-control" v-model="genreFilter">
+                    <option value="">All</option>
+                    <option value="Action">Action</option>
+                    <option value="Comedy">Comedy</option>
+                    <option value="SciFi">SciFi</option>
+                    <option value="Crime">Crime</option>
+                    <option value="Drama">Drama</option>
+                    <option value="Romance">Romance</option>
+                    <option value="Adventure">Adventure</option>
+                </select>
+            </div>
+        </div>
+    </div>
 
-    <input v-model="hello">
+    <div v-for="movie in movies | filterBy liveFilter | filterBy genreFilter" class="row movie-item">
+        <div class="col-md-1 pull">
+            <img v-bind:src="movie.field_movie_poster[0].url" alt="{{ movie.field_movie_poster[0].alt }}">
+        </div>
+        <div class="col-md-10">
+            <h4>{{ movie.title[0].value }}</h4>
+            <p>
+                <strong>Director:</strong> {{ movie.field_director[0].value }}
+            </p>
 
-    <ul>
-        <li v-for='name in names'>
-            {{ name.firstname }}
-            {{ name.lastname }}
-        </li>
-    </ul>
-
-    <hr>
-    <br>
-    <br>
-    <div v-for="movie in movies">
-        <h4>{{ movie.title[0].value }}</h4>
-        <p>
-            <strong>Director:</strong> {{ movie.field_director[0].value }}
-        </p>
-
-        <strong>Actors:</strong><br>
-        <span v-for="actor in movie.field_actors">
-            {{ actor.value }}<br>
-        </span>
-
-        <hr>
-
-        <img src="{{ movie.field_movie_poster[0].url }}" alt="{{ movie.field_movie_poster[0].alt }}">
+            <strong>Actors:</strong><br>
+            <span v-for="actor in movie.field_actors">
+                {{ actor.value }}<br>
+            </span>
+            <hr>
+            <strong>Genre:</strong>
+            <span v-for="genre in movie.field_genres">
+                {{ genre.value }},
+            </span>
+        </div>
     </div>
 </div>
 

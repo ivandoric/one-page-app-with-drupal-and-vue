@@ -7,10 +7,32 @@ html{
 
 body{
     -webkit-font-smoothing: antialiased;
+    padding:60px 0;
 }
 
 *{
     box-sizing:border-box;
+}
+
+.movie-item{
+    border-bottom:1px solid #ccc;
+    margin-bottom: 20px;
+    padding:10px;
+
+    img{
+        max-width: 100%;
+        height:auto;
+    }
+
+    h4{
+        margin-top: 0;
+    }
+}
+
+.filter{
+    padding: 40px;
+    background: #efefef;
+    margin-bottom:40px;
 }
 
 
