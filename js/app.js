@@ -12,7 +12,8 @@ new Vue({
         ],
         movies: '',
         liveFilter: '',
-        genreFilter: ''
+        genreFilter: '',
+        genres: ''
     },
 
     ready: function(){
@@ -23,7 +24,20 @@ new Vue({
         getMovies: function(){
             this.$http.get(apiURL, function(movies){
                 this.$set('movies', movies);
-                console.log(movies);
+
+                genresArr=[];
+
+                jQuery.each(movies, function(index, movie){
+                    jQuery.each(movie.field_genres, function(index, genre){
+                        if(jQuery.inArray(genre.value, genresArr) === -1) {
+                            genresArr.push(genre.value);
+                        }
+                    });
+                });
+
+                this.$set('genres', genresArr);
+                //console.log(JSON.stringify(genresArr));
+                
             });
         }
     }
