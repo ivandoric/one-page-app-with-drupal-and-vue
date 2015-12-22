@@ -4,16 +4,11 @@ new Vue({
     el: '#app',
 
     data: {
-        hello: 'Hello World, Again!',
-        names: [
-            {firstname: 'John', lastname:'Doe'},
-            {firstname: 'Jane', lastname:'Jones'},
-            {firstname: 'Will ', lastname:'Smith'}
-        ],
         movies: '',
         liveFilter: '',
         genreFilter: '',
-        genres: ''
+        genres: '',
+        movie:''
     },
 
     ready: function(){
@@ -22,6 +17,7 @@ new Vue({
 
     methods: {
         getMovies: function(){
+            this.$set('movie', '');
             this.$http.get(apiURL, function(movies){
                 this.$set('movies', movies);
 
@@ -39,6 +35,13 @@ new Vue({
                 //console.log(JSON.stringify(genresArr));
                 
             });
+        },
+
+        getTheMovie: function(movieID){
+            this.$http.get(apiURL + '/' + movieID, function(movie){
+                this.$set('movie', movie);
+                console.log(JSON.stringify(movie));
+            })
         }
     }
 })

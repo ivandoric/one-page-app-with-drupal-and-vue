@@ -21,25 +21,36 @@
         </div>
     </div>
 
-    <div v-for="movie in movies | filterBy liveFilter | filterBy genreFilter" class="row movie-item">
-        <div class="col-md-1 pull">
-            <img v-bind:src="movie.field_movie_poster[0].url" alt="{{ movie.field_movie_poster[0].alt }}">
+    
+    <div class="movie-list" v-show="!movie">
+        <div v-for="movie in movies | filterBy liveFilter | filterBy genreFilter" class="row movie-item">
+            <div class="col-md-1 pull">
+                <img v-bind:src="movie.field_movie_poster[0].url" alt="{{ movie.field_movie_poster[0].alt }}">
+            </div>
+            <div class="col-md-10">
+                <h4><a v-on:click="getTheMovie(movie.nid[0].value)">{{ movie.title[0].value }}</a></h4>
+                <p>
+                    <strong>Director:</strong> {{ movie.field_director[0].value }}
+                </p>
+        
+                <strong>Actors:</strong><br>
+                <span v-for="actor in movie.field_actors">
+                    {{ actor.value }}<br>
+                </span>
+                <hr>
+                <strong>Genre:</strong>
+                <span v-for="genre in movie.field_genres">
+                    {{ genre.value }},
+                </span>
+            </div>
         </div>
-        <div class="col-md-10">
-            <h4>{{ movie.title[0].value }}</h4>
-            <p>
-                <strong>Director:</strong> {{ movie.field_director[0].value }}
-            </p>
+    </div>
 
-            <strong>Actors:</strong><br>
-            <span v-for="actor in movie.field_actors">
-                {{ actor.value }}<br>
-            </span>
-            <hr>
-            <strong>Genre:</strong>
-            <span v-for="genre in movie.field_genres">
-                {{ genre.value }},
-            </span>
+    <div class="single-movie" v-show="movie">
+        <a class="btn btn-danger" v-on:click="getMovies">Back</a>
+        <div class="movie-item" v-for="movieItem in movie">
+            <h2>{{ movieItem.title[0].value }}</h2>
+            {{{ movieItem.body[0].value }}}
         </div>
     </div>
 </div>
