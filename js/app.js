@@ -1,5 +1,16 @@
 apiURL = "http://moviesapi.dev/api/movies"
 
+Vue.component('hello',{
+    template: '#hello',
+
+    data: function(){
+        return {
+            message: 'Hello World'
+        }
+    }
+})
+
+
 new Vue({
     el: '#app',
 

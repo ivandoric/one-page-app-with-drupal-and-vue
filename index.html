@@ -8,6 +8,11 @@
 <body>
 
 <div class="container" id="app">
+
+    <hello></hello>
+
+    <hello></hello>   
+    
     <div class="filter">
         <input type="text" class="form-control" v-model="liveFilter">
         <h4>Filter by Genre:</h4>
@@ -54,6 +59,10 @@
         </div>
     </div>
 </div>
+
+<template id="hello">
+    <h2>{{ message }}</h2>
+</template>
 
 
 <script type="text/javascript" src="js/vue.js"></script>
