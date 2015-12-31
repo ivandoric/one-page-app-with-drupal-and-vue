@@ -1,6 +1,6 @@
 apiURL = "http://moviesapi.dev/api/movies"
 
-Vue.component('hello',{
+var hello = Vue.extend({
     template: '#hello',
 
     data: function(){
@@ -9,6 +9,25 @@ Vue.component('hello',{
         }
     }
 })
+
+var aboutus = Vue.extend({
+    template: '#about-us'
+})
+
+var App = Vue.extend({});
+var router = new VueRouter();
+
+router.map({
+    '/hello':{
+        component: hello
+    },
+    '/about-us':{
+        component: aboutus
+    }
+});
+
+router.start(App, '#app');
+
 
 
 new Vue({

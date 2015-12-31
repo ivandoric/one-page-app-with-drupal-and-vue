@@ -9,10 +9,11 @@
 
 <div class="container" id="app">
 
-    <hello></hello>
-
-    <hello></hello>   
+    <a v-link="{path: '/hello'}">Hello</a>
+    <a v-link="{path: '/about-us'}">About us</a>
     
+    <router-view></router-view>
+
     <div class="filter">
         <input type="text" class="form-control" v-model="liveFilter">
         <h4>Filter by Genre:</h4>
@@ -64,10 +65,16 @@
     <h2>{{ message }}</h2>
 </template>
 
+<template id="about-us">
+    <h2>About us</h2>
+    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut doloremque quibusdam maiores ratione accusamus voluptas, a, provident maxime alias repellat laboriosam obcaecati neque non quidem nihil. Provident sunt, incidunt ipsa commodi est sit voluptatum voluptates!</p>
+</template>
+
 
 <script type="text/javascript" src="js/vue.js"></script>
 <script type="text/javascript" src="js/vue-resource.js"></script>
 <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+<script type="text/javascript" src="js/vue-router.js"></script>
 <script type="text/javascript" src="js/app.js"></script>
 </body>
 </html>
