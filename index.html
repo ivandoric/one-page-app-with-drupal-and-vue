@@ -9,11 +9,12 @@
 
 <div class="container" id="app">
 
-    <a v-link="{path: '/hello'}">Hello</a>
-    <a v-link="{path: '/about-us'}">About us</a>
     
     <router-view></router-view>
 
+</div>
+
+<template id="movie-list-template">
     <div class="filter">
         <input type="text" class="form-control" v-model="liveFilter">
         <h4>Filter by Genre:</h4>
@@ -34,7 +35,7 @@
                 <img v-bind:src="movie.field_movie_poster[0].url" alt="{{ movie.field_movie_poster[0].alt }}">
             </div>
             <div class="col-md-10">
-                <h4><a v-on:click="getTheMovie(movie.nid[0].value)">{{ movie.title[0].value }}</a></h4>
+                <h4><a v-link="{ name: 'movie', params: { movieID: movie.nid[0].value }}">{{ movie.title[0].value }}</a></h4>
                 <p>
                     <strong>Director:</strong> {{ movie.field_director[0].value }}
                 </p>
@@ -52,23 +53,17 @@
         </div>
     </div>
 
+</template>
+
+<template id="single-movie-template">
     <div class="single-movie" v-show="movie">
-        <a class="btn btn-danger" v-on:click="getMovies">Back</a>
         <div class="movie-item" v-for="movieItem in movie">
             <h2>{{ movieItem.title[0].value }}</h2>
             {{{ movieItem.body[0].value }}}
         </div>
     </div>
-</div>
-
-<template id="hello">
-    <h2>{{ message }}</h2>
 </template>
 
-<template id="about-us">
-    <h2>About us</h2>
-    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut doloremque quibusdam maiores ratione accusamus voluptas, a, provident maxime alias repellat laboriosam obcaecati neque non quidem nihil. Provident sunt, incidunt ipsa commodi est sit voluptatum voluptates!</p>
-</template>
 
 
 <script type="text/javascript" src="js/vue.js"></script>
