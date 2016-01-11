@@ -2,6 +2,59 @@ apiURL = "http://moviesapi.dev/api/movies"
 
 var App = Vue.extend({});
 
+var createMovie = Vue.extend({
+    template: '#create-movie',
+
+    data: function(){
+        return {
+            title: '',
+            body: '',
+            success:''
+        }
+    },
+
+    http:{
+        headers:{
+            'Accept' : 'json',
+            'Content-Type' : 'application/hal+json',
+            'Authorization' : 'Basic aXZhbjpwYXNzd29yZA=='
+        }
+    },
+
+    ready: function(){
+        //this.createTheMovie();
+    },
+
+    methods: {
+        createTheMovie: function(event){
+            event.preventDefault();
+            var data = {
+                '_links':{
+                    'type' : {
+                        'href' : 'http://moviesapi.dev/rest/type/node/movies'
+                    }
+                },
+                'title':[
+                    {
+                        'value' : this.title
+                    }
+                ],
+                'body':[
+                    {
+                        'value' : this.body
+                    }
+                ]
+            }
+
+            this.$http.post('http://moviesapi.dev/entity/node', data, function(response){
+                this.$set('success', 'ok');
+                this.$set('title', '');
+                this.$set('body', '');
+            });
+        }
+    }
+})
+
 var movieList = Vue.extend({
     template: '#movie-list-template',
 
@@ -72,6 +125,9 @@ var router = new VueRouter();
 router.map({
     '/':{
         component: movieList
+    },
+    'create':{
+        component: createMovie
     },
     'movie/:movieID':{
         name: 'movie',

@@ -15,6 +15,10 @@
 </div>
 
 <template id="movie-list-template">
+
+    <a v-link="{ path : 'create' }" class="btn btn-success">Create new movie</a>
+    <br>
+    <br>
     <div class="filter">
         <input type="text" class="form-control" v-model="liveFilter">
         <h4>Filter by Genre:</h4>
@@ -62,6 +66,25 @@
             {{{ movieItem.body[0].value }}}
         </div>
     </div>
+</template>
+
+<template id="create-movie">
+    <h2>Create movie</h2>
+    <div class="alert alert-success" v-show="success">You have added a movie.</div>
+    <form v-on:submit="createTheMovie">
+        <div class="form-group">
+            <label>Movie title</label>
+            <input type="text" v-model="title" name="title" class="form-control">
+        </div>
+
+        <div class="form-group">
+            <label>Movie body</label>
+            <textarea class="form-control" v-model="body"></textarea>
+        </div>
+
+        <button type="submit" class="btn btn-success">Add Movie</button>
+    </form>
+
 </template>
 
 
