@@ -38,7 +38,7 @@
             <div class="col-md-1 pull">
                 <img v-bind:src="movie.field_movie_poster[0].url" alt="{{ movie.field_movie_poster[0].alt }}">
             </div>
-            <div class="col-md-10">
+            <div class="col-md-8">
                 <h4><a v-link="{ name: 'movie', params: { movieID: movie.nid[0].value }}">{{ movie.title[0].value }}</a></h4>
                 <p>
                     <strong>Director:</strong> {{ movie.field_director[0].value }}
@@ -53,6 +53,9 @@
                 <span v-for="genre in movie.field_genres">
                     {{ genre.value }},
                 </span>
+            </div>
+            <div class="col-md-3">
+                <a v-link="{ name: 'delete', params: { movieID: movie.nid[0].value }}" class="btn btn-danger">Delete Movie</a>
             </div>
         </div>
     </div>
@@ -85,6 +88,12 @@
         <button type="submit" class="btn btn-success">Add Movie</button>
     </form>
 
+</template>
+
+<template id="delete-movie">
+    <h2>Delete Movie</h2>
+    <p>Are you sure?</p>
+    <button v-on:click="deleteTheMovie" class="btn btn-danger">Delete</button>
 </template>
 
 

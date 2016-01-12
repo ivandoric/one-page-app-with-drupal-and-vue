@@ -2,6 +2,25 @@ apiURL = "http://moviesapi.dev/api/movies"
 
 var App = Vue.extend({});
 
+var deleteMovie = Vue.extend({
+    template: '#delete-movie',
+    http:{
+        headers:{
+            'Accept' : 'json',
+            'Content-Type' : 'application/hal+json',
+            'Authorization' : 'Basic aXZhbjpwYXNzd29yZA=='
+        }
+    },
+
+    methods:{
+        deleteTheMovie: function(){
+            this.$http.delete('http://moviesapi.dev/node/' + this.$route.params.movieID, function(response){
+                this.$route.router.go('/');
+            })
+        }
+    }
+});
+
 var createMovie = Vue.extend({
     template: '#create-movie',
 
@@ -132,6 +151,10 @@ router.map({
     'movie/:movieID':{
         name: 'movie',
         component: singleMovie
+    },
+    'delete/:movieID':{
+        name: 'delete',
+        component: deleteMovie
     }
 });
 
