@@ -56,6 +56,7 @@
             </div>
             <div class="col-md-3">
                 <a v-link="{ name: 'delete', params: { movieID: movie.nid[0].value }}" class="btn btn-danger">Delete Movie</a>
+                <a v-link="{ name: 'edit', params: { movieID: movie.nid[0].value }}" class="btn btn-primary">Edit Movie</a>
             </div>
         </div>
     </div>
@@ -94,6 +95,28 @@
     <h2>Delete Movie</h2>
     <p>Are you sure?</p>
     <button v-on:click="deleteTheMovie" class="btn btn-danger">Delete</button>
+</template>
+
+
+<template id="edit-movie">
+    <h2>Edit movie</h2>
+
+    <form v-on:submit="updateTheMovie">
+        <div v-for="movieItem in movie">
+            <div class="form-group">
+                <label>Movie title</label>
+                <input type="text" v-model="title" name="title" value="{{ movieItem.title[0].value }}" class="form-control">
+            </div>
+            
+            <div class="form-group">
+                <label>Movie body</label>
+                <textarea v-model="body" class="form-control">{{ movieItem.body[0].value }}</textarea>
+            </div>
+        </div>
+
+        <button type="submit" class="btn btn-success">Update Movie</button>
+    </form>
+
 </template>
 
 
