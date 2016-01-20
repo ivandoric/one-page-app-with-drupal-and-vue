@@ -2,6 +2,75 @@ apiURL = "http://moviesapi.dev/api/movies"
 
 var App = Vue.extend({});
 
+var register = Vue.extend({
+    template: '#register',
+
+    data: function(){
+        return {
+            name: '',
+            email: '',
+            password:'',
+            message: '',
+            success: '',
+            error: ''
+        }
+    },
+
+    http:{
+        headers:{
+            'Accept' : 'json',
+            'Content-Type' : 'application/hal+json',
+            'Authorization' : 'Basic aXZhbjpwYXNzd29yZA=='
+        }
+    },
+
+    methods: {
+        registerUser: function(event){
+            event.preventDefault();
+            var data = {
+                '_links':{
+                    'type' : {
+                        'href' : 'http://moviesapi.dev/rest/type/user/user'
+                    }
+                },
+                'name':[
+                    {
+                        'value' : this.name
+                    }
+                ],
+                'mail':[
+                    {
+                        'value' : this.email
+                    }
+                ],
+                'pass':[
+                    {
+                        'value' : this.password
+                    }
+                ],
+                'status':[
+                    {
+                        'value' : '1'
+                    }
+                ],
+                'roles':[
+                    {
+                        'target_id' : 'administrator'
+                    }
+                ]
+            }
+
+            this.$http.post('http://moviesapi.dev/entity/user', data, function(response){
+                this.$set('message', 'You have registered! Yaaaay! :)');
+                this.$set('success', true)
+            }).error(function(response){
+                this.$set('message', 'Something went wrong! Please check your info and try again.');
+                this.$set('error', true);
+            });
+        }
+    }
+})
+
 var editMovie = Vue.extend({
     template: '#edit-movie',
 
@@ -214,7 +283,10 @@ router.map({
     'edit/:movieID':{
         name: 'edit',
         component: editMovie
-    }
+    },
+    'register':{
+        component: register
+    },
 });
 
 router.start(App, '#app');
