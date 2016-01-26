@@ -207,7 +207,8 @@ var movieList = Vue.extend({
             liveFilter: '',
             genreFilter: '',
             genres: '',
-            movie:''
+            movie:'',
+            loading: false
         }
     },
 
@@ -218,7 +219,10 @@ var movieList = Vue.extend({
     methods: {
         getMovies: function(){
             this.$set('movie', '');
+            this.$set('loading', true);
+            
             this.$http.get(apiURL, function(movies){
+                this.$set('loading', false);
                 this.$set('movies', movies);
 
                 genresArr=[];
@@ -244,7 +248,8 @@ var singleMovie = Vue.extend({
 
     data: function(){
         return {
-            movie:''
+            movie:'',
+            loading: false
         }
     },
 
@@ -254,7 +259,9 @@ var singleMovie = Vue.extend({
 
     methods: {
         getTheMovie: function(){
+            this.$set('loading', true);
             this.$http.get(apiURL + '/' + this.$route.params.movieID, function(movie){
+                this.$set('loading', false);
                 this.$set('movie', movie);
                 console.log(JSON.stringify(movie));
             })

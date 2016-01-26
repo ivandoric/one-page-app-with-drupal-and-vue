@@ -34,6 +34,8 @@
     </div>
 
     
+    <div v-show="loading" transition="loading">Content is loading. Please wait...</div>
+
     <div class="movie-list" v-show="!movie">
         <div v-for="movie in movies | filterBy liveFilter | filterBy genreFilter" class="row movie-item">
             <div class="col-md-1 pull">
@@ -65,6 +67,7 @@
 </template>
 
 <template id="single-movie-template">
+    <div v-show="loading" transition="loading">Content is loading. Please wait...</div>
     <div class="single-movie" v-show="movie">
         <div class="movie-item" v-for="movieItem in movie">
             <h2>{{ movieItem.title[0].value }}</h2>

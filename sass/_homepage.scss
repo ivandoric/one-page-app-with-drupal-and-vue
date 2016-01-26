@@ -1,0 +1,13 @@
+.loading-transition{
+    transition: all .3s ease;
+    padding:20px;
+    color:#fff;
+    background:#5CB85C;
+    margin:20px 0;
+    width:100%;
+}
+
+.loading-enter,
+.loading-leave{
+    width:0;
+}
